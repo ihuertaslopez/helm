@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mongodb-deploy
+  name: {{ .Release.Name }}-mongodb-deploy
 spec:
   strategy:
     type: Recreate
@@ -40,7 +40,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mongo-pvc
+  name: {{ .Release.Name }}-mongo-pvc
 spec:
   storageClassName: mongo
   accessModes:
@@ -52,7 +52,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: mongodb-service
+  name: {{ .Release.Name }}-mongodb-service
   labels:
     app: mongodb
 spec:
@@ -77,7 +77,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: mongodb-from-topo
+  name: {{ .Release.Name }}-mongodb-from-topo
 spec:
   podSelector:
     matchLabels:

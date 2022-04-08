@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: weatherservice-deploy
+  name: {{ .Release.Name }}-weatherservice-deploy
 spec:
   strategy:
     type: Recreate
@@ -34,7 +34,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: weatherservice-service
+  name: {{ .Release.Name }}-weatherservice-service
   labels:
     app: weatherservice
 spec:
@@ -51,7 +51,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: weather-from-planner
+  name: {{ .Release.Name }}-weather-from-planner
 spec:
   podSelector:
     matchLabels:

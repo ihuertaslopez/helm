@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mysql-deploy
+  name: {{ .Release.Name }}-mysql-deploy
 spec:
   strategy:
     type: Recreate
@@ -36,7 +36,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mysql-pvc
+  name: {{ .Release.Name }}-mysql-pvc
 spec:
   storageClassName: mysql
   accessModes:
@@ -48,7 +48,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: mysql-service
+  name: {{ .Release.Name }}-mysql-service
   labels:
     app: mysql
 spec:
@@ -65,7 +65,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: mysql-from-server
+  name: {{ .Release.Name }}-mysql-from-server
 spec:
   podSelector:
     matchLabels:
