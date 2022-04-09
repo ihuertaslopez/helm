@@ -21,7 +21,7 @@ spec:
       restartPolicy: Always
       containers:
       - name: toposervice
-        image: codeurjc/toposervice:v1.0
+        image: {{ .Values.toposervice.image }}":"{{ .Values.toposervice.tag }}
         env:
         - name: SPRING_DATA_MONGODB_HOST
           value: mongodb-service
@@ -52,7 +52,7 @@ spec:
     name: topo-port
   selector:
     app: toposervice
-  type: ClusterIP
+  type: {{ .Values.service.type -}} #ClusterIP
 ---
 {{- if .Values.security.enabled -}}
 apiVersion: networking.k8s.io/v1

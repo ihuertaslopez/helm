@@ -42,7 +42,12 @@ kind: PersistentVolumeClaim
 metadata:
   name: {{ .Release.Name }}-mongo-pvc
 spec:
-  storageClassName: mongo
+{{- if not .Values.persistentVolume.enabled }}
+  storageClassName: {{- .Values.persistentVolume.storageclass.mongo -}} #mongo
+{{- else if .Values.persistentVolume.storageclass.isPureDefault -}}
+  annotations:
+    storageclass.kubernetes.io/is-default-class: true
+{{- end }}
   accessModes:
   - ReadWriteOnce
   resources:
@@ -90,4 +95,4 @@ spec:
     ports:
     - port: 27017
       protocol: TCP
-{{- end -}}
+{{- end }}

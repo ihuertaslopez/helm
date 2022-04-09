@@ -39,7 +39,15 @@ kind: PersistentVolumeClaim
 metadata:
   name: {{ .Release.Name }}-rabbit-pvc
 spec:
-  storageClassName: rabbit
+{{- if not .Values.persistentVolume.enabled -}}
+{{- $storageClass := .Values.persistentVolume.storageclass.rabbit -}}
+  storageClassName: {{ $storageClass }} #rabbit
+{{- else -}}
+{{- if .Values.persistentVolume.storageclass.isPureDefault -}}
+  annotations:
+    storageclass.kubernetes.io/is-default-class: true
+{{- end -}}
+{{- end -}}
   accessModes:
   - ReadWriteOnce
   resources:
