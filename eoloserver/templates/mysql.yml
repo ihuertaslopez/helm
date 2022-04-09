@@ -39,14 +39,8 @@ metadata:
   name: {{ .Release.Name }}-mysql-pvc
 spec:
 {{- if not .Values.persistentVolume.enabled -}}
-{{- $storageClass := .Values.persistentVolume.storageclass.mysql -}}
-  storageClassName: {{ $storageClass }} #mysql
-{{- else -}}
-{{- if .Values.persistentVolume.storageclass.isPureDefault -}}
-  annotations:
-    storageclass.kubernetes.io/is-default-class: true
-{{- end -}}
-{{- end -}}
+  storageClassName: {{ .Values.persistentVolume.storageclass.musql }} #mysql
+{{- end }}
   accessModes:
   - ReadWriteOnce
   resources:

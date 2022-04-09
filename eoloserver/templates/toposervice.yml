@@ -21,7 +21,7 @@ spec:
       restartPolicy: Always
       containers:
       - name: toposervice
-        image: {{ .Values.toposervice.image }}":"{{ .Values.toposervice.tag }}
+        image: {{ .Values.toposervice.image }}:{{ .Values.toposervice.tag }}
         env:
         - name: SPRING_DATA_MONGODB_HOST
           value: mongodb-service

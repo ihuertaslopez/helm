@@ -1,14 +1,15 @@
-{{- if .Values.persistentVolume.enabled -}}
+{{- if .Values.persistentVolume.enabled }}
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: {{ .Release.Name }}-mongo-pv
+# {{- if .Values.persistentVolume.storageclass.isPureDefault }}
+#   annotations:
+#     storageclass.kubernetes.io/is-default-class: true
+# {{- end }}
 spec:
-{{- if not .Values.persistentVolume.storageclass.isPureDefault -}}
+{{- if not .Values.persistentVolume.storageclass.isPureDefault }}
   storageClassName: mongo
-{{- else }}
-  annotations:
-    storageclass.kubernetes.io/is-default-class: true
 {{- end }}
   accessModes:
     - ReadWriteOnce

@@ -37,13 +37,13 @@ planner: #codeurjc/planner:v1.0
   tag: v1.0
 
 server: #codeurjc/server:v1.0
-  image: server
+  image: codeurjc/server
   tag: v1.0
 
 toposervice: #codeurjc/toposervice:v1.0
-  image: toposervice
+  image: codeurjc/toposervice
   tag: v1.0
 
 weatherservice: #codeurjc/weatherservice:v1.0
-  image: weatherservice
+  image: codeurjc/weatherservice
   tag: v1.0
