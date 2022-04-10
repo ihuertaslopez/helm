@@ -21,7 +21,7 @@ spec:
       restartPolicy: Always
       containers:
       - name: server
-        image: codeurjc/server:v1.0
+        image: {{ .Values.server.image }}:{{ .Values.server.tag }}
         command: ["bash"]
         args:
         - "-c"
@@ -54,7 +54,7 @@ spec:
     name: server-port
   selector:
     app: server
-  type: ClusterIP
+  type: {{ .Values.service.type -}} #ClusterIP
 ---
 {{- if .Values.security.enabled -}}
 apiVersion: networking.k8s.io/v1

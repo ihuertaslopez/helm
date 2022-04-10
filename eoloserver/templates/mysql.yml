@@ -38,7 +38,9 @@ kind: PersistentVolumeClaim
 metadata:
   name: {{ .Release.Name }}-mysql-pvc
 spec:
-  storageClassName: mysql
+{{- if not .Values.persistentVolume.enabled -}}
+  storageClassName: {{ .Values.persistentVolume.storageclass.musql }} #mysql
+{{- end }}
   accessModes:
   - ReadWriteOnce
   resources:
