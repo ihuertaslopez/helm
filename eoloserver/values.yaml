@@ -15,7 +15,7 @@ security:
   enabled: true
 
 service:
-  type: ClusterIP #NodePort
+  type: NodePort #NodePort
   port: 80
 
 ingress:
@@ -26,12 +26,13 @@ ingress:
 # Persistent volumes
 persistentVolume:
   enabled: true #false creación por defecto
-  storageclass:
-    mysql: mysql
-    mongo: mongo
-    rabbit: rabbit
-    isPureDefault: true
-
+  mysql:
+    storageclass: 
+  mongo:
+    storageclass: mongo
+  rabbit:
+    storageclass: rabbit
+    
 planner: #codeurjc/planner:v1.0
   image: codeurjc/planner
   tag: v1.0
