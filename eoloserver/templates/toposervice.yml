@@ -52,7 +52,11 @@ spec:
     name: topo-port
   selector:
     app: toposervice
-  type: {{ .Values.service.type -}} #ClusterIP
+{{- if .Values.ingress.enabled }}
+  type: ClusterIP
+{{- else }}
+  type: {{ .Values.service.type }}
+{{ end }}
 ---
 {{- if .Values.security.enabled -}}
 apiVersion: networking.k8s.io/v1

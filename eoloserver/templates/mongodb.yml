@@ -41,13 +41,9 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: {{ .Release.Name }}-mongo-pvc
-# {{- if .Values.persistentVolume.storageclass.isPureDefault -}}
-  # annotations:
-  #   storageclass.kubernetes.io/is-default-class: true
-# {{- end }}
 spec:
-{{- if not .Values.persistentVolume.enabled -}}
-  storageClassName: {{ .Values.persistentVolume.storageclass.mongo }} #mongo
+{{- if .Values.persistentVolume.mongo.storageclass }}
+  storageClassName: {{ .Values.persistentVolume.mongo.storageclass }}
 {{- end }}
   accessModes:
   - ReadWriteOnce
