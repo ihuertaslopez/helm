@@ -23,9 +23,9 @@ spec:
       - name: planner
         image: {{ .Values.planner.image }}:{{ .Values.planner.tag }}
         env:
-        - name: SPRING_TOPO_HOST
+        - name: TOPO_HOST
           value: {{ .Release.Name }}-toposervice-service
-        - name: SPRING_TOPO_PORT
+        - name: TOPO_PORT
           value: {{ .Values.toposervice.ports.containerPort | quote }}
         - name: GRPC_CLIENT_WEATHERSERVER_ADDRESS
           value: static://{{ .Release.Name }}-weatherservice-service:{{ .Values.weatherservice.env.port }}
