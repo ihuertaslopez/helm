@@ -16,7 +16,7 @@ service:
   port: 80
 
 ingress:
-  enabled: false
+  enabled: true
   hosts:
     host: cluster-ip
     paths:
