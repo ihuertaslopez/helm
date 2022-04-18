@@ -8,6 +8,7 @@ Get the application URL by running these commands:
   export NODE_IP = $(kubectl get nodes --namespace default -o jsonpath="{.items[0].status.addresses[0].address}")
   export NODE_PORT = $(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ .Release.Name }}-server-service)
   echo http://$(kubectl get nodes --namespace default -o jsonpath="{.items[0].status.addresses[0].address}"):$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ .Release.Name }}-server-service)
+  echo http://$(kubectl get nodes --namespace default -o jsonpath="{.items[0].status.addresses[0].address}"):$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ .Release.Name }}-toposervice-service)/api/topographicdetails/
 {{- else if contains "LoadBalancer" .Values.service.type }}
      NOTE: It may take a few minutes for the LoadBalancer IP to be available.
            You can watch the status of by running 'kubectl get --namespace {{ .Release.Namespace }} svc -w {{ .Release.Name }}-server-service'
