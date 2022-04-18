@@ -16,7 +16,7 @@ service:
   port: 3000
 
 ingress:
-  enabled: true
+  enabled: false
   hosts:
     host: cluster-ip
     paths:
