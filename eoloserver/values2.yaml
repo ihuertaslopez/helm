@@ -12,36 +12,70 @@ security:
   enabled: true
 
 service:
-  type: NodePort #NodePort
-  port: 80
+  type: NodePort
+  port: 3000
 
 ingress:
-  enabled: false
+  enabled: true
   hosts:
-    host: cluster-ip
+    host: cluster-ip2
+    paths:
+    - path: /
+    - path: /toposervice/
 
 # Persistent volumes
 persistentVolume:
-  enabled: true #false creación por defecto
+  enabled: true
   mysql:
     storageclass: mysql
+    path: /db/mysql2
   mongo:
     storageclass: mongo
+    path: /db/mongo2
   rabbit:
     storageclass: rabbit
-    
-planner: #codeurjc/planner:v1.0
-  image: codeurjc/planner
-  tag: v1.0
+    path: /db/rabbitmq2
 
-server: #codeurjc/server:v1.0
+mysql:
+  image: mysql
+  tag: 8.0.28
+  env:
+    password: password
+    database: eoloplantsDB
+
+mongodb:
+  image: mongo
+  tag: 5.0.6-focal
+  env:
+    user: root
+    password: password
+    database: eoloplantsDB
+
+rabbitmq:
+  image: rabbitmq
+  tag: 3.9-management
+  env:
+    defaultUser: root
+    defaultPass: password
+
+#codeurjc/planner:v1.0
+#huertaslopez/i.huertas.2021-v.martinp.2021-planner:2.0.0
+planner: 
+  image: huertaslopez/i.huertas.2021-v.martinp.2021-planner
+  tag: 2.0.0
+
+server:
   image: codeurjc/server
   tag: v1.0
 
-toposervice: #codeurjc/toposervice:v1.0
+toposervice:
   image: codeurjc/toposervice
   tag: v1.0
+  ports:
+    containerPort: 8181
 
-weatherservice: #codeurjc/weatherservice:v1.0
+weatherservice:
   image: codeurjc/weatherservice
   tag: v1.0
+  env:
+    port: 9090
